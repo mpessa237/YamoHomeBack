@@ -2,19 +2,18 @@ package com.example.YamoHome.controller;
 
 import com.example.YamoHome.common.ApiResponse;
 import com.example.YamoHome.dto.RegistrationRequest;
+import com.example.YamoHome.entities.User;
 import com.example.YamoHome.services.CreateAdmin;
 import com.example.YamoHome.services.RegisterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,10 +24,15 @@ public class RegistrationController {
     private final CreateAdmin createAdmin;
 
 
-    @PostMapping("/user")
+    @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody RegistrationRequest registrationRequest){
         var user = registerService.register(registrationRequest);
         return ResponseEntity.ok(new ApiResponse("successfully register user",user.getNom()));
+    }
+
+    @GetMapping("/register")
+    public ResponseEntity<List<User>> getAll(){
+        return ResponseEntity.ok(this.registerService.findAll());
     }
 
     @PostMapping("/create-admin")
@@ -36,8 +40,4 @@ public class RegistrationController {
         var admin = createAdmin.createAdmin(registrationRequest);
         return ResponseEntity.ok(new ApiResponse("admin created successfully",admin.getNom()));
     }
-
-
-
-
 }

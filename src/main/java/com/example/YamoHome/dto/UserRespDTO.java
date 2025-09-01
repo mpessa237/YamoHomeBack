@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationResponseDTO {
+public class UserRespDTO {
+    private Long userId;
     private String nom;
-    private String token;
-    private List<String> roles;
+    private String email;
 }

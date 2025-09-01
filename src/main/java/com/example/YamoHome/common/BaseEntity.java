@@ -26,10 +26,10 @@ import java.time.LocalDateTime;
 public class BaseEntity {
     @CreatedBy
     @Column(nullable = false, updatable = false)
-    private Integer createdBy;
+    private Long createdBy; // Changez Integer en Long
     @LastModifiedBy
     @Column(insertable = false)
-    private Integer lastModifiedBy;
+    private Long lastModifiedBy; // Changez Integer en Long
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

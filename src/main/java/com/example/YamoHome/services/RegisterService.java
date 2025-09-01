@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -32,5 +33,9 @@ public class RegisterService {
 
         user.setRole(Set.of(Role.ROLE_USER));
         return userRepo.save(user);
+    }
+
+    public List<User> findAll(){
+        return this.userRepo.findAll();
     }
 }
