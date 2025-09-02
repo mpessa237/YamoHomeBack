@@ -1,5 +1,7 @@
 package com.example.YamoHome.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +35,7 @@ public class User implements UserDetails , Principal {
     private Boolean accountLocked;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Announcement> announcements;
 
     @Enumerated(EnumType.STRING)

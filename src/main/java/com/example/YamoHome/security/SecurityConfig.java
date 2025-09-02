@@ -3,6 +3,7 @@ package com.example.YamoHome.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,7 +27,9 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(req->req.requestMatchers("/api/auth/**").permitAll()
+                .authorizeHttpRequests(req->req
+                                .requestMatchers(HttpMethod.GET, "/api/announcements").permitAll() // C'est ici qu'il faut faire la modification
+                                .requestMatchers("/api/auth/**").permitAll()
                         .anyRequest().authenticated())
 
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
